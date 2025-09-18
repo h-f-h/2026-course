@@ -1,0 +1,946 @@
+﻿/* בסיס משתנים ועקרונות נגישות */
+:root {
+    --bg: #ffffff;
+    --fg: #141414;
+    --muted: #616161;
+    --brand: #0a7cff;
+    --brand-ink: #084fae;
+    --surface: #f6f8fb;
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(0, 0, 0, .08);
+}
+
+* {
+    box-sizing: border-box
+}
+
+html, body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    direction: rtl;
+    text-align: right;
+    line-height: 1.6;
+}
+
+.container {
+    width: min(1100px, 92%);
+    margin-inline: auto
+}
+
+/* מוסתרת ויזואלית אבל נגישה לקורא מסך */
+.skip-link {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* כשהיא בפוקוס – מציגים אותה במקום קבוע בראש המסך */
+.skip-link:focus {
+    clip: auto;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: .5rem .75rem;
+    left: 0;
+    top: 0;
+    background: #000;
+    color: #fff;
+    z-index: 1000;
+}
+
+img, svg, video, canvas, iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0
+}
+
+.brand {
+    font-weight: 800
+}
+
+.btn {
+    display: inline-block;
+    border: none;
+    border-radius: 999px;
+    padding: .8rem 1.1rem;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+}
+
+.btn.primary {
+    background: var(--brand);
+    color: #fff;
+    box-shadow: var(--shadow)
+}
+
+.btn.primary:hover {
+    background: var(--brand-ink)
+}
+
+.btn.subtle {
+    background: transparent;
+    color: #fff;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .2s, color .2s;
+}
+
+.btn.subtle:hover {
+    background: #fff;
+    color: #0a7cff;
+}
+
+.btn.full {
+    width: 100%
+}
+
+.hero {
+    position: relative;
+    background: url('assets/img/hero.jpg') center/cover no-repeat;
+    color: var(--fg, #141414);
+    text-align: center;
+    padding-top: 6rem; /* השארת מקום ללוגו */
+    padding-bottom: 4rem;
+}
+
+.hero h1 {
+    font-size: clamp(1.8rem, 2.5vw + 1rem, 3rem);
+    margin: 0 0 .5rem
+}
+
+.lead {
+    color: var(--muted);
+    margin: 0 0 1.25rem
+}
+
+.hero-cta {
+    display: flex;
+    gap: .75rem;
+    justify-content: center;
+    flex-wrap: wrap
+}
+
+.features {
+    display: grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0 3rem;
+}
+
+.card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow)
+}
+
+.contact {
+    margin: 2.5rem 0
+}
+
+.form {
+    background: #fff;
+    border: 1px solid #e7eaf0;
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow)
+}
+
+.form .grid {
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    gap: 1rem
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin: .6rem 0
+}
+
+input, textarea {
+    width: 100%;
+    margin-top: .4rem;
+    padding: .8rem;
+    border-radius: 12px;
+    border: 1px solid #d7dce3;
+    background: #fff;
+}
+
+input:focus, textarea:focus {
+    outline: 3px solid rgba(10, 124, 255, .2);
+    border-color: var(--brand)
+}
+
+.hidden {
+    display: none
+}
+
+.small {
+    color: var(--muted)
+}
+
+.footer {
+    padding: 2rem 0;
+    text-align: center;
+    color: var(--muted)
+}
+
+/* רספונסיביות */
+@media (max-width: 900px) {
+    .features {
+        grid-template-columns:1fr 1fr
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 16px;
+        padding: 0
+    }
+
+    .hero {
+        padding: 3rem 0 2rem
+    }
+
+    .hero-cta {
+        flex-direction: column
+    }
+
+    .features {
+        grid-template-columns:1fr
+    }
+
+    .form {
+        padding: 1rem
+    }
+
+    .form .grid {
+        grid-template-columns:1fr
+    }
+
+    /* שדות שם/טלפון יורדים לשורה נפרדת */
+    .btn {
+        padding: 1rem
+    }
+
+    input, textarea {
+        font-size: 1rem
+    }
+}
+
+/* hero */
+.hero {
+    position: relative;
+    background: url('../img/hero.jpg') no-repeat center center/cover;
+    height: 33vh;
+    display: flex;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6); /* דרגת הטשטוש/כהות */
+    z-index: 0;
+}
+
+.hero-text {
+    position: relative;
+    z-index: 1; /* כדי שהטקסט יהיה מעל הטשטוש */
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+}
+
+.tagline {
+    font-size: 1.1rem;
+    margin-top: .5rem;
+}
+
+/* about */
+.about {
+    padding: 3rem 0;
+    background: linear-gradient(180deg, #fffaf4 0%, #ffffff 100%);
+}
+
+.about-box {
+    background: #fffdf8;
+    border: 1px solid #f2e5c8;
+    border-radius: 18px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(223, 174, 103, 0.05);
+    line-height: 1.9;
+    font-size: 1.05rem;
+}
+
+.about-box p {
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+@media (max-width: 600px) {
+    .about-box {
+        padding: 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+
+.teachers {
+    padding: 3rem 0;
+}
+
+.teachers h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+/* שורת המרצים */
+.teachers-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    text-align: center;
+}
+
+/* כרטיס מרצה */
+.teacher {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* תמונה עגולה */
+.teacher img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f2e5c8;
+}
+
+/* שם המרצה */
+.teacher .name {
+    font-weight: bold;
+    font-size: 1.05rem;
+    margin: 0.5rem 0 0.3rem;
+    color: #333;
+}
+
+/* תיאור */
+.teacher .desc {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* תת כותרת – רק למי שצריך */
+.teacher .note {
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    color: #0a7cff;
+    font-weight: 600;
+}
+
+
+.cta-wrapper {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+@media (max-width: 600px) {
+    .hero {
+        height: auto; /* חשוב */
+        min-height: 50vh; /* או אפילו 60vh */
+        padding: 2rem 1rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-text {
+        padding: 1rem;
+    }
+
+    .hero-text h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+    }
+}
+
+.testimonials-section {
+    text-align: center;
+}
+
+.testimonial {
+    display: flex;
+    flex-direction: column;
+    height: 190px;
+    width: 300px;
+    background: #fffdf8;
+    border: 1px solid #f2e5c8;
+    border-radius: 12px;
+    padding: 0.7rem 1rem;
+    box-shadow: 0 5px 15px rgba(223, 174, 103, 0.08);
+    transition: transform 0.2s ease;
+}
+
+
+/* אל תמנע הצגת testimonials-group במובייל */
+.testimonials-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 1rem 0 0.2rem;
+}
+
+/* נסתרת רק אם יש לה מחלקה .hidden */
+.testimonials-group.hidden {
+    display: none;
+}
+
+/* מצב מובייל – כל הכרטיסים מוסתרים, פרט לאקטיבי */
+@media (max-width: 767px) {
+    .testimonial {
+        display: none;
+    }
+
+    .testimonial.active {
+        display: block;
+    }
+}
+
+
+/* החלק של הציטוט גמיש – תופס כל מה שאפשר */
+.quote-text {
+    flex-grow: 1;
+}
+
+/* סגנון לציטוט */
+.testimonial .Quote {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    font-style: italic;
+    color: #000;
+}
+
+/* החלק של המחבר מוצמד לתחתית בזכות שהציטוט גודל */
+.quote-footer {
+    margin-top: 0.7rem;
+}
+
+/* שם המחבר */
+.testimonial .author {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #bf6300;
+    opacity: 0.8;
+}
+
+/* תיאור המחבר */
+.testimonial .authorDescription {
+    margin-top: 0.1rem;
+    margin-bottom: 0;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #000;
+    opacity: 0.8;
+}
+
+
+.testimonial-dots {
+    margin-top: 0.1rem;
+}
+
+.dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    background-color: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dot.active {
+    background-color: #bf6300;
+}
+
+/* מצב רגיל (מובייל ומסך צר) – הצג את כל הנקודות */
+.testimonial-dots .dot {
+    display: inline-block;
+}
+
+/* במסכים גדולים – הצג רק את הנקודה הראשונה והשנייה */
+@media (min-width: 768px) {
+    .testimonial-dots .dot:nth-child(n+3) {
+        display: none;
+    }
+}
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+
+.poster {
+    background: #fff;
+    border: 1px solid #f0e4cf;
+    border-radius: 24px;
+    padding: 1.75rem;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, .06);
+}
+
+/* כותרת + באדג׳ */
+.poster-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.poster-badge {
+    background: #fff3e3;
+    color: #c46a00;
+    border: 1px solid #f7d6a8;
+    padding: .35rem .7rem;
+    border-radius: 999px;
+    font-weight: 700;
+    white-space: nowrap;
+    max-width: 15rem;
+    text-align: center;
+    display: table;
+    margin-inline: auto;
+}
+
+/* צ׳יפסים */
+.poster-chips {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+
+.chip {
+    background: #fffdf8;
+    border: 1px solid #f2e5c8;
+    border-radius: 999px;
+    padding: .35rem .75rem;
+    font-size: .95rem;
+}
+
+.chip b {
+    color: #bf6300;
+}
+
+.chip.total {
+    background: #fff7e9;
+    border-color: #f0cf9f;
+}
+
+/* גוף הפוסטר: שני טורים */
+.poster-body {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+/* סידור אנכי נעים בכל טור */
+.poster-body .col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.price-card {
+    align-self: stretch;
+}
+
+@media (max-width: 860px) {
+    .poster-body {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* רשימת פרטים */
+.poster-list {
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style: none;
+    line-height: 1.9;
+    font-size: 1rem;
+}
+
+.poster-list li b {
+    color: #333;
+}
+
+/* הערת הנחות/סבסוד */
+.poster-note {
+    background: #eef9f0;
+    border: 1px solid #cfe9d5;
+    color: #164b29;
+    border-radius: 14px;
+    padding: .9rem 1rem;
+    font-size: .95rem;
+}
+
+.poster-note a {
+    color: var(--brand);
+    text-decoration: none;
+}
+
+.poster-note a:hover {
+    text-decoration: underline;
+}
+
+/* כרטיס מחיר */
+.price-card {
+    background: linear-gradient(180deg, #fff 0%, #fff7ef 100%);
+    border: 1px solid #f3d7ba;
+    border-radius: 18px;
+    padding: 1rem;
+    box-shadow: 0 10px 24px rgba(223, 174, 103, .12);
+    text-align: center;
+}
+
+.price-early {
+    background: #fff1e1;
+    border: 1px solid #f0c99d;
+    border-radius: 14px;
+    padding: .9rem;
+    margin-bottom: .75rem;
+}
+
+.price-early .label {
+    color: #b95800;
+    font-weight: 800;
+    margin-bottom: .25rem;
+}
+
+.price-early .amount {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e8b782;
+    line-height: 1.2;
+}
+
+.price-early .until {
+    font-size: 1rem;
+    color: #B95800FF;
+}
+
+.price-regular {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px dashed #e6c39b;
+    border-radius: 12px;
+    padding: .6rem .8rem;
+    margin-bottom: 1rem;
+    color: #5a3a18;
+}
+
+.price-regular b {
+    font-size: 1.15rem;
+}
+
+.price-card .btn {
+    width: 100%;
+    padding: .9rem 1rem;
+}
+
+.chips-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+
+/* ========= Popup base ========= */
+
+/* סגור כברירת מחדל */
+.popup {
+    display: none;
+    position: fixed;
+    inset: 0; /* top/right/bottom/left:0 */
+    z-index: 9999;
+    background: rgba(0, 0, 0, .6); /* שכבת רקע כהה */
+    align-items: center;
+    justify-content: center;
+    padding: 1rem; /* מרווח בקצוות במסכים קטנים */
+}
+
+/* פתוח */
+.popup.is-open {
+    display: flex;
+}
+
+/* התיבה הפנימית */
+.popup-inner {
+    width: min(920px, 100%);
+    border-radius: 18px;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, .25);
+    padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* ========= Visual theme for this modal ========= */
+
+/* רקע אופציונלי עם תמונה וטשטוש לבן עדין */
+.contact-modal {
+    background: #ffffff url('/assets/img/autum.jpg') center/cover no-repeat;
+}
+
+.contact-modal::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .6), rgba(255, 255, 255, .6));
+}
+
+.contact-modal > * {
+    position: relative;
+}
+
+/* כפתור סגירה (X) */
+.close-popup {
+    position: absolute;
+    top: .6rem;
+    left: .6rem; /* RTL – בצד שמאל */
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: #fff;
+    color: #333;
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+    cursor: pointer;
+    line-height: 1;
+    font-size: 1.25rem;
+}
+
+.close-popup:hover {
+    filter: brightness(.97);
+}
+
+.close-popup:focus {
+    outline: 3px solid rgba(10, 124, 255, .25);
+}
+
+/* ========= Form ========= */
+
+.contact-form .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* שתי עמודות בדסקטופ */
+    gap: .9rem;
+}
+
+.contact-form label {
+    font-weight: 700;
+    color: #333;
+    display: block;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    margin-top: .35rem;
+    padding: .85rem .9rem;
+    border: 1px solid #d7dce3;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 1rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: 3px solid rgba(10, 124, 255, .20);
+    border-color: var(--brand, #0a7cff);
+}
+
+.contact-form .full {
+    grid-column: 1 / -1;
+}
+
+/* שדה הודעה על פני שתי עמודות */
+
+.btn-submit {
+    width: 100%;
+    margin-top: .6rem;
+    padding: .9rem 1rem;
+    border: none;
+    border-radius: 999px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+
+/* ========= Header ========= */
+
+.contact-header {
+    text-align: center;
+    margin: 0 0 .8rem;
+}
+
+.contact-header h2 {
+    margin: 0 0 .25rem;
+    font-size: clamp(1.4rem, 1rem + 2vw, 2.4rem);
+    line-height: 1.2;
+}
+
+.contact-sub {
+    margin: 0;
+    color: #555;
+    font-size: clamp(.95rem, .85rem + .4vw, 1.05rem);
+}
+
+
+/* ========= Accessibility helpers ========= */
+.hidden {
+    display: none !important;
+}
+
+/* ========= Responsive ========= */
+@media (max-width: 640px) {
+    .popup-inner {
+        border-radius: 14px;
+    }
+
+    .contact-form .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .close-popup {
+        top: .5rem;
+        left: .5rem;
+    }
+}
+
+.quick-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.quick-link {
+    display: flex;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 0.1rem 1rem;
+    text-decoration: none;
+    color: #222;
+    transition: background 0.2s;
+    min-width: 150px;
+}
+
+.quick-link:hover {
+    background: #f0f0f0;
+}
+
+.icon-img {
+    width: 24px;
+    height: 24px;
+    margin-left: 0.5rem;
+}
+
+.text {
+    font-weight: 600;
+    color: var(--brand, #0a7cff);
+    direction: ltr;
+    text-align: left;
+}
+
+
+.partner-logos {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.partner-logos .logo-caption {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.logos-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.logos-row img {
+    height: 80px;
+    max-width: 160px;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.logos-row img:hover {
+    transform: scale(1.05);
+}

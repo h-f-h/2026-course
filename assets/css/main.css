@@ -911,6 +911,7 @@ input:focus, textarea:focus {
     color: var(--brand, #0a7cff);
     direction: ltr;
     text-align: left;
+    font-size: small;
 }
 
 

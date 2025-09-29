@@ -2,9 +2,9 @@
 :root {
     --bg: #ffffff;
     --fg: #141414;
-    --muted: #616161;
-    --brand: #0a7cff;
-    --brand-ink: #084fae;
+    --muted: #d3bb9f;
+    --brand: #F2B05E;
+    --brand-ink: #401303;
     --surface: #f6f8fb;
     --radius: 16px;
     --shadow: 0 10px 30px rgba(0, 0, 0, .08);
@@ -102,6 +102,17 @@ img, svg, video, canvas, iframe {
 
 .btn.primary:hover {
     background: var(--brand-ink)
+}
+
+#registration {
+    background-color: #F26513;
+    color: white;           
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+#registration:hover {
+    background-color: var(--brand-ink);
 }
 
 .btn.subtle {

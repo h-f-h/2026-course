@@ -87,4 +87,12 @@
 
     // הפעלה ראשונית
     dots[0].click();
+
+    // כפתור הרשמה - מעבר לקישור
+    const registerBtn = document.getElementById('registration');
+    if (registerBtn) {
+        registerBtn.addEventListener('click', () => {
+            window.location.href = 'https://meshulam.co.il/purchase?b=e44e28775ca5369ef561e298292feca4';
+        });
+    }
 });
